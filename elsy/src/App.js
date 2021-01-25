@@ -16,7 +16,8 @@ export class App extends React.Component {
     icon: "local_drink",
     color: "#3A85FF",
     value: 1.5,
-    unit: "L"
+    unit: "L",
+    type: "water"
   }
 
   Steps = {
@@ -40,14 +41,26 @@ export class App extends React.Component {
     unit: "°C"
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      water: 0,
+      heart: 120,
+      temperature: -10,
+      steps: 3000
+    };
+  }
+  onHeartChange = function (value) {
+    this.setState({ heart: value })
+  }
   render() {
     return (
       <div className="container-fluid">
         <div className="row">
-          <Box icon={this.Water.icon} color={this.Water.color} value={this.Water.value} unit={this.Water.unit} /> {/* Water */}
-          <Box icon={this.Steps.icon} color={this.Steps.color} value={this.Steps.value} unit={this.Steps.unit} /> {/* Steps */}
-          <Box icon={this.Heart.icon} color={this.Heart.color} value={this.Heart.value} unit={this.Heart.unit} /> {/* Heart */}
-          <Box icon={this.Temperature.icon} color={this.Temperature.color} value={this.Temperature.value} unit={this.Temperature.unit} /> {/* Temperature */}
+          <Box {...this.Water} /> {/* Water */}
+          <Box {...this.Steps} /> {/* Steps */}
+          <Box {...this.Heart} /> {/* Heart */}
+          <Box {...this.Temperature} /> {/* Temperature */}
         </div>
       </div>
     );
