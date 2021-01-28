@@ -80,12 +80,33 @@ export class App extends React.Component {
     this.setState({ water: result })
   }
 
+  moins = () => {
+    if (this.state.steps === 0) {
+      return
+    }
+    else {
+      this.setState({steps: this.state.steps - 1000})
+      this.calculateWater()
+    }
+    
+  }
+
+  plus = () => {
+    if (this.state.steps < 50000) {
+      this.setState({steps: this.state.steps + 1000})
+      this.calculateWater()
+    }
+    else  {
+      return
+    }  
+  }
+
   render() {
     return (
       <div className="container-fluid">
         <div className="row">
           <Box {...this.water} value={this.state.water} /> {/* Water */}
-          <Box {...this.steps} onChange={this.state.onStepsChange} value={this.state.steps} min={stepsMin} max={stepsMax} /> {/* Steps */}
+          <Box {...this.steps} onChange={this.state.onStepsChange} value={this.state.steps} min={stepsMin} max={stepsMax} moins={this.moins} plus={this.plus}/> {/* Steps */}
           <Box {...this.heart} onChange={this.state.onHeartChange} value={this.state.heart} min={heartMin} max={heartMax} /> {/* Heart */}
           <Box {...this.temperature} onChange={this.state.onTemperatureChange} value={this.state.temperature} min={tempMin} max={tempMax} /> {/* Temperature */}
         </div>
