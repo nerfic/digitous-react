@@ -14,6 +14,7 @@ class App extends React.Component {
       classEmail: "form-control is-invalid",
       classPassword: "form-control is-invalid",
       classButton: "btn btn-primary disabled",
+      buttonClicked: 0,
       onEmailChange: (e) => {
         this.setState({ email: e.target.value })
         let reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -45,25 +46,40 @@ class App extends React.Component {
           console.log("fail")
           this.setState({ classButton: "btn btn-primary disabled" })
         }
+      },
+      onButtonClicked: (e) => {
+        this.setState({ buttonClicked: 1 })
+        console.log("ta cliqué")
       }
     };
   }
 
-  render() {
+  renderValid() {
+    return (
+      <p>Envoyé!</p>
+    )
+  }
+
+  renderBefore() {
     return (
       <div>
         <div className="container">
-          <Login buttonClass={this.state.classButton} emailClass={this.state.classEmail} emailValid={this.state.onEmailChange} passwordClass={this.state.classPassword} passwordValid={this.state.onPasswordChange} />
+          <Login onClick={this.state.onButtonClicked} buttonClass={this.state.classButton} emailClass={this.state.classEmail} emailValid={this.state.onEmailChange} passwordClass={this.state.classPassword} passwordValid={this.state.onPasswordChange} />
         </div>
       </div>
     )
   }
 
-  renderValid() {
+  render() {
     return (
-      <p>Validé</p>
+      <div>
+        {this.state.buttonClicked === 1 && this.renderValid()}
+        {this.state.buttonClicked === 0 && this.renderBefore()}
+      </div>
     )
   }
+
+
 }
 
 export default App;
