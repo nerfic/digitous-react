@@ -16,7 +16,7 @@ class Login extends React.Component {
                                 Remember me
                             </label>
                         </div>
-                        <button type="button" className="btn btn-primary" disabled>Submit</button>
+                        <button type="button" className={this.props.buttonClass}>Submit</button>
                     </div>
                 </div>
             </div>

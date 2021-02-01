@@ -13,6 +13,7 @@ class App extends React.Component {
       passwordValid: false,
       classEmail: "form-control is-invalid",
       classPassword: "form-control is-invalid",
+      classButton: "btn btn-primary disabled",
       onEmailChange: (e) => {
         this.setState({ email: e.target.value })
         let reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -23,6 +24,7 @@ class App extends React.Component {
           this.setState({ classEmail: "form-control is-invalid" })
           this.setState({ emailValid: false })
         }
+        this.state.isValid();
       },
       onPasswordChange: (e) => {
         this.setState({ password: e.target.value })
@@ -33,12 +35,15 @@ class App extends React.Component {
           this.setState({ classPassword: "form-control is-invalid" })
           this.setState({ passwordValid: false })
         }
+        this.state.isValid();
       },
       isValid: () => {
         if (this.state.emailValid && this.state.passwordValid) {
           console.log("les deux sont good")
+          this.setState({ classButton: "btn btn-primary" })
         } else {
           console.log("fail")
+          this.setState({ classButton: "btn btn-primary disabled" })
         }
       }
     };
@@ -48,9 +53,15 @@ class App extends React.Component {
     return (
       <div>
         <div className="container">
-          <Login emailClass={this.state.classEmail} emailValid={this.state.onEmailChange} passwordClass={this.state.classPassword} passwordValid={this.state.onPasswordChange} />
+          <Login buttonClass={this.state.classButton} emailClass={this.state.classEmail} emailValid={this.state.onEmailChange} passwordClass={this.state.classPassword} passwordValid={this.state.onPasswordChange} />
         </div>
       </div>
+    )
+  }
+
+  renderValid() {
+    return (
+      <p>Validé</p>
     )
   }
 }
