@@ -3,6 +3,7 @@ import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "./components/Button"
 import Card from "./components/Card"
+import Search from "./components/Search"
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class App extends React.Component {
       flag: "",
       population: "",
       region: "",
+      searchValue: "",
     }
   }
 
@@ -29,6 +31,16 @@ class App extends React.Component {
         })
       })
       .catch(error => console.error(error))
+  }
+
+  onSearch = (e) => {
+    this.setState({
+      searchValue: e.target.value
+    })
+  }
+
+  onClickSearch = () => {
+    this.getCountry(this.state.searchValue)
   }
 
   componentDidMount() {
@@ -50,7 +62,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <div class="row">
+          <div className="row">
+            <Search onChange={this.onSearch} onClick={this.onClickSearch}></Search>
+          </div>
+          <div className="row">
             <Button onClick={(e) => this.getCountry("France")}>France</Button>
             <Button onClick={(e) => this.getCountry("brazil")}>Brazil</Button>
             <Button onClick={(e) => this.getCountry("croatia")}>Croatia</Button>
