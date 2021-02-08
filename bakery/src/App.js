@@ -58,7 +58,7 @@ class App extends React.Component {
           <div className="row">
             {this.state.activeTab === "Add" && <Add addItems={this.addItem}></Add>}
             {this.state.activeTab === "List" && <List items={this.state.items}></List>}
-            {this.state.activeTab === "Pay" && <Pay></Pay>}
+            {this.state.activeTab === "Pay" && <Pay items={this.state.items}></Pay>}
           </div>
         </header>
       </div>
