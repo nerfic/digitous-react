@@ -14,7 +14,6 @@ class Pay extends React.Component {
     }
 
     handleSelect = (name, price) => {
-        console.log("handleselect", name, price)
         const items = {
             name: name,
             price: price
@@ -24,13 +23,11 @@ class Pay extends React.Component {
         this.setState({
             basket: newItems
         })
-        console.log("basket", this.state.basket)
         this.calculateTotal()
     }
 
     calculateTotal = () => {
         let basket = this.state.basket;
-        console.log("let basket = ", basket)
         let total = 0;
         let totalEcoTax = 0;
         let totalTVA = 0;
