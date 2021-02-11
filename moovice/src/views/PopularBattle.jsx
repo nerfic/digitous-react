@@ -19,7 +19,7 @@ class PopularBattle extends React.Component {
             favorites_id: favorites
         })
         console.log("value favorites", this.state.favorites_id)
-        localStorage.setItem("favorites_id", this.state.favorites_id)
+        localStorage.setItem("favorites_id", JSON.stringify(this.state.favorites_id))
 
     }
 
