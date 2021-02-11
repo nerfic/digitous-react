@@ -8,7 +8,8 @@ class WeeklyBattle extends React.Component {
         this.state = {
             movies: [],
             currentBattle: 0,
-            favorites_id: []
+            favorites_id: [],
+            displayButton: true
         }
     }
 
@@ -42,22 +43,28 @@ class WeeklyBattle extends React.Component {
                 <div className="container mt-5">
                     {this.state.movies.length > 1 && this.state.currentBattle < this.state.movies.length &&
                         <>
-                            <button onClick={(event) => this.onClickBattle(event, this.state.movies[this.state.currentBattle].id)}>
+                        <div  className="row ">
+                            <div className="col-12 col-md-6">
                                 <Cards
                                     img={`https://image.tmdb.org/t/p/w300/${this.state.movies[this.state.currentBattle].backdrop_path}`}
                                     title={this.state.movies[this.state.currentBattle].title}
                                     desc={this.state.movies[this.state.currentBattle].overview}
                                     date={this.state.movies[this.state.currentBattle].release_date}
+                                    displayButton={this.state.displayButton}
+                                    voteButton={(event) => this.onClickBattle(event, this.state.movies[this.state.currentBattle].id)}
                                 />
-                            </button>
-                            <button onClick={(event) => this.onClickBattle(event, this.state.movies[this.state.currentBattle + 1].id)}>
+                            </div>
+                            <div className="col-12 col-md-6">
                                 <Cards
                                     img={`https://image.tmdb.org/t/p/w300/${this.state.movies[this.state.currentBattle + 1].backdrop_path}`}
                                     title={this.state.movies[this.state.currentBattle + 1].title}
                                     desc={this.state.movies[this.state.currentBattle + 1].overview}
                                     date={this.state.movies[this.state.currentBattle + 1].release_date}
+                                    voteButton={(event) => this.onClickBattle(event, this.state.movies[this.state.currentBattle + 1].id)}
+                                    displayButton={this.state.displayButton}
                                 />
-                            </button>
+                            </div>
+                        </div>
                         </>
                     }
                     {
