@@ -12,16 +12,15 @@ class PopularBattle extends React.Component {
     }
 
     onClickBattle = (event, id) => {
-        let favorites = []
-        favorites.push(`${id}`)
+        let favorites = this.state.favorites_id
+        favorites.push(id)
         this.setState({
             currentBattle: this.state.currentBattle + 2,
             favorites_id: favorites
         })
-        console.log(this.state.favorites_id)
-        let ancien = JSON.parse(localStorage.getItem("favorites_id"))
-        ancien.push(id)
-        localStorage.setItem("favorites_id", JSON.stringify(ancien))
+        console.log("value favorites", this.state.favorites_id)
+        localStorage.setItem("favorites_id", this.state.favorites_id)
+
     }
 
     componentDidMount() {
@@ -39,7 +38,7 @@ class PopularBattle extends React.Component {
         return (
             <div>
                 <div className="container mt-5">
-                    {this.state.movies.length >= 1 &&
+                    {this.state.movies.length > 1 && this.state.currentBattle < this.state.movies.length &&
                         <>
                             <button onClick={(event) => this.onClickBattle(event, this.state.movies[this.state.currentBattle].id)}>
                                 <Cards
@@ -49,7 +48,7 @@ class PopularBattle extends React.Component {
                                     date={this.state.movies[this.state.currentBattle].release_date}
                                 />
                             </button>
-                            <button onClick={(event) => this.onClickBattle(event, this.state.movies[this.state.currentBattle].id)}>
+                            <button onClick={(event) => this.onClickBattle(event, this.state.movies[this.state.currentBattle + 1].id)}>
                                 <Cards
                                     img={`https://image.tmdb.org/t/p/w300/${this.state.movies[this.state.currentBattle + 1].backdrop_path}`}
                                     title={this.state.movies[this.state.currentBattle + 1].title}
@@ -57,6 +56,12 @@ class PopularBattle extends React.Component {
                                     date={this.state.movies[this.state.currentBattle + 1].release_date}
                                 />
                             </button>
+                        </>
+                    }
+                    {
+                        this.state.currentBattle === this.state.movies.length && 
+                        <>
+                            <p>Vous avez parcouru tous les films !</p>
                         </>
                     }
                 </div>
