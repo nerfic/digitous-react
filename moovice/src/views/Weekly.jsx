@@ -2,7 +2,7 @@ import React from 'react'
 import Cards from "../components/Cards"
 import moment from 'moment';
 
-class Popular extends React.Component {
+class Weekly extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -43,4 +43,4 @@ class Popular extends React.Component {
     }
 }
 
-export default Popular;
+export default Weekly;
