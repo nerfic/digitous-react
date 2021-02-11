@@ -6,8 +6,22 @@ class PopularBattle extends React.Component {
         super(props)
         this.state = {
             movies: [],
-            currentBattle: 1
+            currentBattle: 0,
+            favorites_id: []
         }
+    }
+
+    onClickBattle = (event, id) => {
+        let favorites = []
+        favorites.push(`${id}`)
+        this.setState({
+            currentBattle: this.state.currentBattle + 2,
+            favorites_id: favorites
+        })
+        console.log(this.state.favorites_id)
+        let ancien = JSON.parse(localStorage.getItem("favorites_id"))
+        ancien.push(id)
+        localStorage.setItem("favorites_id", JSON.stringify(ancien))
     }
 
     componentDidMount() {
@@ -25,18 +39,26 @@ class PopularBattle extends React.Component {
         return (
             <div>
                 <div className="container mt-5">
-                    {this.state.movies.map(film => {
-                        return (
-                            <button>
+                    {this.state.movies.length >= 1 &&
+                        <>
+                            <button onClick={(event) => this.onClickBattle(event, this.state.movies[this.state.currentBattle].id)}>
                                 <Cards
-                                    img={`https://image.tmdb.org/t/p/w300/${film.backdrop_path}`}
-                                    title={film.title}
-                                    desc={film.overview}
-                                    date={film.release_date}
+                                    img={`https://image.tmdb.org/t/p/w300/${this.state.movies[this.state.currentBattle].backdrop_path}`}
+                                    title={this.state.movies[this.state.currentBattle].title}
+                                    desc={this.state.movies[this.state.currentBattle].overview}
+                                    date={this.state.movies[this.state.currentBattle].release_date}
                                 />
                             </button>
-                        )
-                    })}
+                            <button onClick={(event) => this.onClickBattle(event, this.state.movies[this.state.currentBattle].id)}>
+                                <Cards
+                                    img={`https://image.tmdb.org/t/p/w300/${this.state.movies[this.state.currentBattle + 1].backdrop_path}`}
+                                    title={this.state.movies[this.state.currentBattle + 1].title}
+                                    desc={this.state.movies[this.state.currentBattle + 1].overview}
+                                    date={this.state.movies[this.state.currentBattle + 1].release_date}
+                                />
+                            </button>
+                        </>
+                    }
                 </div>
             </div>
         )
