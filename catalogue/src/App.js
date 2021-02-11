@@ -79,7 +79,7 @@ class App extends React.Component {
         "T'Challa, the King of Wakanda, rises to the throne in the isolated, technologically advanced African nation, but his claim is challenged by a vengeful outsider who was a childhood victim of T'Challa's father's mistake.",
     },
     {
-      id: 8,
+      id: 9,
       title: "Red Sparrow",
       director: "Francis Lawrence",
       stars: ["Jennifer Lawrence", "Joel Edgerton", "Matthias Schoenaerts"],
@@ -102,16 +102,10 @@ class App extends React.Component {
               </Route>
               <Route path="/film/:id/"
                 render={(props) => {
-                  console.log(this.movies[props.match.params.id].title)
                   return <Film
-                    film={props.match.params.id}
-                    filmTitle={this.movies[props.match.params.id].title}
-                    realisator={this.movies[props.match.params.id].director}
-                    actor={this.movies[props.match.params.id].stars}
-                    image={this.movies[props.match.params.id].image}
-                    description={this.movies[props.match.params.id].description}
+                    {...props}
+                    movies={this.movies}
                   />
-
                 }}>
               </Route>
             </Switch>

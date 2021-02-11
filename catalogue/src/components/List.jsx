@@ -7,7 +7,7 @@ export default class List extends Component {
             <div>
                 {this.props.film.map((film, index) => {
                     return (
-                        <Link key={index} to={`/film/${index}/`}>
+                        <Link key={index} to={`/film/${film.id}/`}>
                             <img className="" alt="film" src={film.image} />
                         </Link>
                     );
